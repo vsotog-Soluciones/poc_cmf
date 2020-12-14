@@ -41,22 +41,10 @@ class raw_activosbanco1_mes(huemulBigDataGov: huemul_BigDataGovernance, Control:
    //forma rápida de configuración de columnas del archivo
    //CurrentSetting.DataSchemaConf.setHeaderColumnsString("institucion_id;institucion_nombre")
    //Forma detallada
+    
      .addColumn("Instituciones", "Instituciones", StringType, "Instituciones")
-     .addColumn("Colocaciones_1", "Colocaciones_1", DecimalType(10,2), "Colocaciones_1")
-     .addColumn("Efectivo_y_depsitos_en_bancos", "Efectivo_y_depsitos_en_bancos", DecimalType(10,2), "Efectivo_y_depsitos_en_bancos")
-     .addColumn("Instrumentos_financieros_no_derivados", "Instrumentos_financieros_no_derivados", DecimalType(10,2), "Instrumentos_financieros_no_derivados")
-     .addColumn("Instrumentos_financieros_derivados", "Instrumentos_financieros_derivados", DecimalType(10,2), "Instrumentos_financieros_derivados")
-     .addColumn("Contratos_de_retrocompra_y_prstamos_de_valores_activos", "Contratos_de_retrocompra_y_prstamos_de_valores_activos", DecimalType(10,2), "Contratos_de_retrocompra_y_prstamos_de_valores_activos")
-     .addColumn("Inversiones_en_sociedades_y_en_sucursales_en_el_exterior", "Inversiones_en_sociedades_y_en_sucursales_en_el_exterior", DecimalType(10,2), "Inversiones_en_sociedades_y_en_sucursales_en_el_exterior")
-     .addColumn("Activo_fijo", "Activo_fijo", DecimalType(10,2), "Activo_fijo")
-     .addColumn("Activo_por_derecho_a_usar_bienes_en_arrendamiento_", "Activo_por_derecho_a_usar_bienes_en_arrendamiento_", DecimalType(10,2), "Activo_por_derecho_a_usar_bienes_en_arrendamiento_")
-     .addColumn("Activos_Totales", "Activos_Totales", DecimalType(10,2), "Activos_Totales")
-     .addColumn("Crditos_contingentes", "Crditos_contingentes", DecimalType(10,2), "Crditos_contingentes")
-     .addColumn("Colocaciones_de_comercio_exterior_totales", "Colocaciones_de_comercio_exterior_totales", DecimalType(10,2), "Colocaciones_de_comercio_exterior_totales")
-     .addColumn("Operaciones_de_leasing_totales", "Operaciones_de_leasing_totales", DecimalType(10,2), "Operaciones_de_leasing_totales")
-     .addColumn("Operaciones_de_factoraje", "Operaciones_de_factoraje", DecimalType(10,2), "Operaciones_de_factoraje") 
-     .addColumn("Cartera_con_morosidad_de_90_das_o_ms", "Cartera_con_morosidad_de_90_das_o_ms", DecimalType(10,2), "Cartera_con_morosidad_de_90_das_o_ms") 
-     .addColumn("Cartera_deteriorada", "Cartera_deteriorada", DecimalType(10,2), "Cartera_deteriorada")      
+     .addColumn("Producto", "Producto", StringType , "Producto")
+     .addColumn("Monto", "Monto", DecimalType(10,2), "Monto")     
 
    //Seteo de lectura de información de Log (en caso de tener)
      .setHeaderColumnDelimiterType(huemulType_Separator.CHARACTER)  //POSITION;CHARACTER;NONE
@@ -106,7 +94,7 @@ class raw_activosbanco1_mes(huemulBigDataGov: huemul_BigDataGovernance, Control:
       //**********************
       control.NewStep("Valida que cantidad de registros esté entre 0 y 100")    
       //validacion cantidad de filas
-      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 0, 100)      
+      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 0, 400)      
       if (validanumfilas.isError) control.RaiseError(s"user: Numero de Filas fuera del rango. ${validanumfilas.Description}")
                         
       control.FinishProcessOK                      

@@ -73,51 +73,14 @@ class tbl_poc_cmf_activosbanco1_mes(huemulBigDataGov: huemul_BigDataGovernance, 
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
   
-  val colocaciones_1: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Colocaciones_1")
+  val producto: huemul_Columns = new huemul_Columns (StringType, true, "Producto")
+          .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
 
-  val efectivo_y_depsitos_en_bancos: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Efectivo_y_depsitos_en_bancos")
-          .securityLevel(huemulType_SecurityLevel.Public)  
-
-  val instrumentos_financieros_no_derivados: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Instrumentos_financieros_no_derivados")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val instrumentos_financieros_derivados: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Instrumentos_financieros_derivados")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val contratos_de_retrocompra_y_prstamos_de_valores_activos: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Contratos_de_retrocompra_y_prstamos_de_valores_activos")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val inversiones_en_sociedades_y_en_sucursales_en_el_exterior: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Inversiones_en_sociedades_y_en_sucursales_en_el_exterior")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val activo_fijo: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Activo_fijo")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val activo_por_derecho_a_usar_bienes_en_arrendamiento: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Activo_por_derecho_a_usar_bienes_en_arrendamiento_")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val activos_totales: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Activos_Totales")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val crditos_contingentes: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Crditos_contingentes")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val colocaciones_de_comercio_exterior_totales: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Colocaciones_de_comercio_exterior_totales")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val operaciones_de_leasing_totales: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Operaciones_de_leasing_totales")
-          .securityLevel(huemulType_SecurityLevel.Public)
-
-  val operaciones_de_factoraje: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Operaciones_de_factoraje")
-          .securityLevel(huemulType_SecurityLevel.Public)
+  val monto: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Monto")
+          .setIsPK()        
+          .securityLevel(huemulType_SecurityLevel.Public)          
   
-  val cartera_con_morosidad_de_90_das_o_ms: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Cartera_con_morosidad_de_90_das_o_ms")
-          .securityLevel(huemulType_SecurityLevel.Public)       
-
-  val cartera_deteriorada: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Cartera_deteriorada")
-          .securityLevel(huemulType_SecurityLevel.Public)       
-
   //**********Atributos adicionales de DataQuality 
   /*
             .setIsPK()         //por default los campos no son PK

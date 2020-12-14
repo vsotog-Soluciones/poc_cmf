@@ -4,7 +4,7 @@ import org.junit._
 import Assert._
 import com.huemulsolutions.bigdata.common._
 import com.huemulsolutions.bigdata.control._
-import com.yourcompany.tables.master._
+import com.soluciones.tables.master._
 
 
 @Test

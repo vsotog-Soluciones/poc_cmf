@@ -32,7 +32,15 @@
 	    <artifactId>dbutils-api_2.11</artifactId>
 	    <version>0.0.4</version>
 	</dependency>
-    
+
+      <dependency>
+<groupId>jdk.tools</groupId>
+<artifactId>jdk.tools</artifactId>
+<version>jdk1.8.0_271</version>
+<scope>system</scope>
+<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+</dependency>
+
   	<dependency>
     	<groupId>com.huemulsolutions.bigdata</groupId>
     	<artifactId>huemul-bigdatagovernance</artifactId>

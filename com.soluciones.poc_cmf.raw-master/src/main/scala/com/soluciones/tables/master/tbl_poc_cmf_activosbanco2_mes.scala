@@ -73,79 +73,14 @@ class tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov: huemul_BigDataGovernance, 
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
   
-  val activos_adeudado_por_bancos_neto_de_provisiones_total: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_total")
+  val producto: huemul_Columns = new huemul_Columns (StringType, true, "Producto")
+          .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
 
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1")
-          .securityLevel(huemulType_SecurityLevel.Public)  
-
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios")
+  val monto: huemul_Columns = new huemul_Columns (DecimalType(14,2), true, "Monto")
+          .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  val activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-    
-  val colocaciones: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "colocaciones")
-          .securityLevel(huemulType_SecurityLevel.Public)
-  
-  
+          .setNullable("false")          
   
   //**********Atributos adicionales de DataQuality 
   /*

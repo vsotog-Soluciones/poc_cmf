@@ -41,56 +41,11 @@ class raw_activosbanco2_mes(huemulBigDataGov: huemul_BigDataGovernance, Control:
    //forma rápida de configuración de columnas del archivo
    //CurrentSetting.DataSchemaConf.setHeaderColumnsString("institucion_id;institucion_nombre")
    //Forma detallada
+    
      .addColumn("Instituciones", "Instituciones", StringType, "Instituciones")
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_total", "activos_adeudado_por_bancos_neto_de_provisiones_total", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_total")
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1")
-     
-     
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios")
+     .addColumn("Producto", "Producto", StringType , "Producto")
+     .addColumn("Monto", "Monto", DecimalType(10,2), "Monto")     
 
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior", "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior")
-
-     .addColumn("activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile", "activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile", DecimalType(10,2), "activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1", "activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes", "activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones") 
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones") 
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones")
-
-     .addColumn("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones", "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones", DecimalType(10,2), "activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones")
-
-     .addColumn("colocaciones", "colocaciones", DecimalType(10,2), "colocaciones")
-
-     
    //Seteo de lectura de información de Log (en caso de tener)
      .setHeaderColumnDelimiterType(huemulType_Separator.CHARACTER)  //POSITION;CHARACTER;NONE
      .setHeaderColumnDelimiter(";")
@@ -137,9 +92,9 @@ class raw_activosbanco2_mes(huemulBigDataGov: huemul_BigDataGovernance, Control:
         
       //****VALIDACION DQ*****
       //**********************
-      control.NewStep("Valida que cantidad de registros esté entre 0 y 100")    
+      control.NewStep("Valida que cantidad de registros esté entre 0 y 2000")    
       //validacion cantidad de filas
-      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 0, 100)      
+      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 0, 2000)      
       if (validanumfilas.isError) control.RaiseError(s"user: Numero de Filas fuera del rango. ${validanumfilas.Description}")
                         
       control.FinishProcessOK                      

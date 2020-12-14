@@ -86,21 +86,8 @@ object process_activosbanco1_mes {
       huemulTable.DF_from_SQL("FinalRAW"
                           , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
                                     ,Instituciones
-                                    ,Colocaciones_1
-                                    ,Efectivo_y_depsitos_en_bancos
-                                    ,Instrumentos_financieros_no_derivados
-                                    ,Instrumentos_financieros_derivados
-                                    ,Contratos_de_retrocompra_y_prstamos_de_valores_activos
-                                    ,Inversiones_en_sociedades_y_en_sucursales_en_el_exterior
-                                    ,Activo_fijo
-                                    ,Activo_por_derecho_a_usar_bienes_en_arrendamiento_
-                                    ,Activos_Totales
-                                    ,Crditos_contingentes
-                                    ,Colocaciones_de_comercio_exterior_totales
-                                    ,Operaciones_de_leasing_totales
-                                    ,Operaciones_de_factoraje
-                                    ,Cartera_con_morosidad_de_90_das_o_ms
-                                    ,Cartera_deteriorada
+                                    ,Producto
+                                    ,Monto
 
                                FROM DF_RAW""")
       
@@ -114,21 +101,9 @@ object process_activosbanco1_mes {
       
       huemulTable.periodo_mes.setMapping("periodo_mes")
       huemulTable.instituciones.setMapping("Instituciones")
-      huemulTable.colocaciones_1.setMapping("Colocaciones_1")
-      huemulTable.efectivo_y_depsitos_en_bancos.setMapping("Efectivo_y_depsitos_en_bancos")
-      huemulTable.instrumentos_financieros_no_derivados.setMapping("Instrumentos_financieros_no_derivados")
-      huemulTable.instrumentos_financieros_derivados.setMapping("Instrumentos_financieros_derivados")
-      huemulTable.contratos_de_retrocompra_y_prstamos_de_valores_activos.setMapping("Contratos_de_retrocompra_y_prstamos_de_valores_activos")
-      huemulTable.inversiones_en_sociedades_y_en_sucursales_en_el_exterior.setMapping("Inversiones_en_sociedades_y_en_sucursales_en_el_exterior")
-      huemulTable.activo_fijo.setMapping("Activo_fijo")
-      huemulTable.activo_por_derecho_a_usar_bienes_en_arrendamiento.setMapping("Activo_por_derecho_a_usar_bienes_en_arrendamiento_")
-      huemulTable.activos_totales.setMapping("Activos_Totales")
-      huemulTable.crditos_contingentes.setMapping("crditos_contingentes")
-      huemulTable.colocaciones_de_comercio_exterior_totales.setMapping("Colocaciones_de_comercio_exterior_totales")
-      huemulTable.operaciones_de_leasing_totales.setMapping("Operaciones_de_leasing_totales")
-      huemulTable.operaciones_de_factoraje.setMapping("Operaciones_de_factoraje")
-      huemulTable.cartera_con_morosidad_de_90_das_o_ms.setMapping("Cartera_con_morosidad_de_90_das_o_ms")
-      huemulTable.cartera_deteriorada.setMapping("Cartera_deteriorada")
+      huemulTable.producto.setMapping("Producto")
+      huemulTable.monto.setMapping("Monto")
+      
 
       // huemulTable.setApplyDistinct(false) //deshabilitar si DF tiene datos únicos, por default está habilitado      
       

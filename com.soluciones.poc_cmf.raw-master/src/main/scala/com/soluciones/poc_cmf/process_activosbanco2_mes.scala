@@ -20,7 +20,7 @@ object process_activosbanco2_mes {
   */
   def main(args : Array[String]) {
     //Creacion API
-    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_activosbanco1_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
+    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_activosbanco2_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
     
     /*************** PARAMETROS **********************/
     var param_ano = huemulBigDataGov.arguments.GetValue("ano", null, "Debe especificar el parametro año, ej: ano=2017").toInt
@@ -86,30 +86,8 @@ object process_activosbanco2_mes {
       huemulTable.DF_from_SQL("FinalRAW"
                           , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
                                     ,Instituciones
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_total
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior
-                                    ,activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones
-                                    ,activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones
-                                    ,colocaciones
+                                    ,Producto
+                                    ,Monto
 
                                FROM DF_RAW""")
       
@@ -123,32 +101,9 @@ object process_activosbanco2_mes {
       
       huemulTable.periodo_mes.setMapping("periodo_mes")
       huemulTable.instituciones.setMapping("Instituciones")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_total.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_total")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_total_1")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_prestamos_interbancarios")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_creditos_de_comercio_exterior")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_pais_provisiones_para_creditos_con_bancos_del_pais")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_total_1")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_prestamos_interbancarios")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_creditos_de_comercio_exterior")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_bancos_del_exterior_provisiones_para_creditos_con_bancos_del_exterior")
-      huemulTable.activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile.setMapping("activos_adeudado_por_bancos_neto_de_provisiones_banco_central_de_chile")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__total_1")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__provisiones_constituidas_de_cred_y_ctas_por_cob_a_clientes")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_colocaciones")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__colocaciones_comerciales_empresas_1_provisiones")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_total")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_provisiones")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_total")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_en_cuotas")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_tarjetas_de_credito")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_otros")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_consumo_1_provisiones")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_colocaciones")
-      huemulTable.activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones.setMapping("activos_creditos_y_cuentas_por_cobrar_a_clientes__personas_vivienda_1_provisiones")
-      huemulTable.colocaciones.setMapping("colocaciones")
-
-
+      huemulTable.producto.setMapping("Producto")
+      huemulTable.monto.setMapping("Monto")
+      
 
       // huemulTable.setApplyDistinct(false) //deshabilitar si DF tiene datos únicos, por default está habilitado      
       
