@@ -3,8 +3,8 @@
   <groupId>com.soluciones</groupId>
   <artifactId>poc_cmf</artifactId>
   <version>2.6.2</version>
-  <name>BigDataGovernance-Template</name>
-  <description>Template base para ser utilizado en cualquier proyecto BigData</description>
+  <name>Poc_CMF_Soluciones</name>
+  <description>POC con datos de CMF para el Banco de Chile - huemulsolutions</description>
   <inceptionYear>2018</inceptionYear>
   <licenses>
     <license>
