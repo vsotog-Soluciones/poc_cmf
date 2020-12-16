@@ -1,4 +1,4 @@
-package com.soluciones.tables.master
+package com.soluciones.tables.dim
 
 
 import com.huemulsolutions.bigdata.common._
@@ -7,16 +7,16 @@ import com.huemulsolutions.bigdata.tables._
 import org.apache.spark.sql.types._
 
 
-class tbl_poc_cmf_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
+class tbl_dim_poc_cmf_salida_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
   /**********   C O N F I G U R A C I O N   D E   L A   T A B L A   ****************************************/
   //Tipo de tabla, Master y Reference son catalogos sin particiones de periodo
   this.setTableType(huemulType_Tables.Transaction)
   //Base de Datos en HIVE donde sera creada la tabla
-  this.setDataBase(huemulBigDataGov.GlobalSettings.MASTER_DataBase)
+  this.setDataBase(huemulBigDataGov.GlobalSettings.DIM_DataBase)
   //Tipo de archivo que sera almacenado en HDFS
   this.setStorageType(huemulType_StorageType.PARQUET)
   //Ruta en HDFS donde se guardara el archivo PARQUET
-  this.setGlobalPaths(huemulBigDataGov.GlobalSettings.MASTER_SmallFiles_Path)
+  this.setGlobalPaths(huemulBigDataGov.GlobalSettings.DIM_SmallFiles_Path)
   //Ruta en HDFS especifica para esta tabla (Globalpaths / localPath)
   this.setLocalPath("poc_cmf/")
   //columna de particion
@@ -69,16 +69,18 @@ class tbl_poc_cmf_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Contro
       .setPartitionColumn(1, dropBeforeInsert = true, oneValuePerProcess = true)
       .setBusinessGlossary("BG001")
 
-  val instituciones: huemul_Columns = new huemul_Columns (StringType, true, "Instituciones")
+  val institucion_nom: huemul_Columns = new huemul_Columns (StringType, true, "Nombre de la institución bancaria")
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
   
-  val producto: huemul_Columns = new huemul_Columns (StringType, true, "Producto")
+  val producto_nom: huemul_Columns = new huemul_Columns (StringType, true, "Nombre del producto")
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)  
 
-  val monto: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Monto")
-          .setIsPK()        
+  val activo_mon: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Monto del activo (en millones de pesos)")
+          .securityLevel(huemulType_SecurityLevel.Public)  
+
+  val activo_mon_mes_ant: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Monto del activo (en millones de pesos) del mes anterior")
           .securityLevel(huemulType_SecurityLevel.Public)          
   
   //**********Atributos adicionales de DataQuality 
