@@ -75,12 +75,16 @@ object process_activosbanco_test_mes {
       if (!DF_RAW_AC1.open("DF_RAW_AC1", Control, param_ano, param_mes, 1, 0, 0, 0))       
         Control.RaiseError(s"error encontrado, abortar: ${DF_RAW_AC1.Error.ControlError_Message}")
       
+      val DF_RAW_AC2 =  new raw_activosbanco2_mes(huemulBigDataGov, Control)
+      if (!DF_RAW_AC2.open("DF_RAW_AC2", Control, param_ano, param_mes, 1, 0, 0, 0))       
+        Control.RaiseError(s"error encontrado, abortar: ${DF_RAW_AC1.Error.ControlError_Message}")
       
       /*********************************************************/
       /*************** LOGICAS DE NEGOCIO **********************/
       /*********************************************************/
       //instancia de clase tbl_yourapplication_entidad_mes 
-      var tabla_instituciones = new tbl_poc_cmf_institucion(huemulBigDataGov, Control) // instituciones
+      var tabla_instituciones = new tbl_poc_cmf_institucion(huemulBigDataGov, Control)
+      var tabla_productos = new tbl_poc_cmf_product(huemulBigDataGov, Control) // instituciones
 
 
 
@@ -90,15 +94,21 @@ object process_activosbanco_test_mes {
       huemulTable.DF_from_SQL("FinalRAW"
                           , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
                                     ,insti.institucion_id as institucion_id
-                                    ,Producto
-                                    ,Monto
+                                    ,activos.Producto
+                                    ,activos.Monto
 
                                FROM DF_RAW_AC1 activos
+                                                           
+
                                INNER JOIN ${tabla_instituciones.getTable()} insti
                                ON activos.Instituciones = insti.institucion_desc
+                               INNER JOIN ${tabla_productos.getTable()} product
+                               ON activos.producto = product.prod_Path 
+                        
                                """)
       
       DF_RAW_AC1.DataFramehuemul.DataFrame.unpersist()
+      DF_RAW_AC2.DataFramehuemul.DataFrame.unpersist()
       
       //comentar este codigo cuando ya no sea necesario generar estadisticas de las columnas.
       Control.NewStep("QUITAR!!! Generar Estadisticas de las columnas SOLO PARA PRIMERA EJECUCION")

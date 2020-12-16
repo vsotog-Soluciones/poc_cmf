@@ -7,7 +7,7 @@ import com.huemulsolutions.bigdata.tables._
 import org.apache.spark.sql.types._
 
 
-class tbl_poc_cmf_product_N2(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
+class tbl_poc_cmf_product(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
   /**********   C O N F I G U R A C I O N   D E   L A   T A B L A   ****************************************/
   //Tipo de tabla, Master y Reference son catalogos sin particiones de periodo
   this.setTableType(huemulType_Tables.Master)
@@ -65,17 +65,19 @@ class tbl_poc_cmf_product_N2(huemulBigDataGov: huemul_BigDataGovernance, Control
     //Columna de periodo
 
  
-   val Prod_n2_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "Prod_n2_id")
+   val producto_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "producto_id")
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)   
 
-  val Prod_n2_desc: huemul_Columns = new huemul_Columns (StringType, true, "Prod_n2_desc")      
+  val product_desc: huemul_Columns = new huemul_Columns (StringType, true, "product_desc")       
           .securityLevel(huemulType_SecurityLevel.Public)  
 
-   val Prod_n1_id: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Prod_n1_id")       
+   val Prod_n5_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "Prod_n5_id")      
           .securityLevel(huemulType_SecurityLevel.Public)  
 
-               
+
+   val prod_Path: huemul_Columns = new huemul_Columns (StringType, true, "prod_Path")       
+          .securityLevel(huemulType_SecurityLevel.Public)                  
   
 
         
