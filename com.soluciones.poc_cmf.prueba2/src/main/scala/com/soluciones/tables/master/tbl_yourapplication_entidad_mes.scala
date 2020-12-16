@@ -7,7 +7,7 @@ import com.huemulsolutions.bigdata.tables._
 import org.apache.spark.sql.types._
 
 
-class tbl_poc_cmf_activosbanco_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
+class tbl_yourapplication_entidad_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
   /**********   C O N F I G U R A C I O N   D E   L A   T A B L A   ****************************************/
   //Tipo de tabla, Master y Reference son catalogos sin particiones de periodo
   this.setTableType(huemulType_Tables.Transaction)
@@ -63,29 +63,23 @@ class tbl_poc_cmf_activosbanco_mes(huemulBigDataGov: huemul_BigDataGovernance, C
   /**********   C O L U M N A S   ****************************************/
 
     //Columna de periodo
-
   val periodo_mes: huemul_Columns = new huemul_Columns (StringType, true,"periodo de los datos")
       .setIsPK()
-      .securityLevel(huemulType_SecurityLevel.Public)  
       .setPartitionColumn(1, dropBeforeInsert = true, oneValuePerProcess = true)
       .setBusinessGlossary("BG001")
 
-   val institucion_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "institucion_id")
-          .setIsPK()        
-          .securityLevel(huemulType_SecurityLevel.Public)   
+  val ejemplo_producto_id: huemul_Columns = new huemul_Columns (IntegerType, true, "codigo del producto")
+          .securityLevel(huemulType_SecurityLevel.Public)  
+  
+  val fecha_venta: huemul_Columns = new huemul_Columns (StringType, true, "fecha de la venta")
+          .securityLevel(huemulType_SecurityLevel.Public)  
 
-   val producto_id: huemul_Columns = new huemul_Columns (StringType, true, "producto_id")
-        .setIsPK()        
-         .securityLevel(huemulType_SecurityLevel.Public)      
-     val monto: huemul_Columns = new huemul_Columns (DecimalType(14,2), true, "monto")
-          .setIsPK()        
+  val cantidad: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Cantidad del producto")
+          .securityLevel(huemulType_SecurityLevel.Public)  
+
+  val precio: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Precio de la transaccion")
           .securityLevel(huemulType_SecurityLevel.Public)
-          .setNullable("false")          
-                   
-  
 
-        
-  
   //**********Atributos adicionales de DataQuality 
   /*
             .setIsPK()         //por default los campos no son PK

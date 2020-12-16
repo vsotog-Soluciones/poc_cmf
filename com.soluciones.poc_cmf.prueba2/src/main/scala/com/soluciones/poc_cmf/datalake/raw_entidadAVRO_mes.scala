@@ -14,42 +14,45 @@ import com.soluciones.settings.globalSettings._
  * Clase que permite abrir un archivo de texto, devuelve un objeto huemul_dataLake con un DataFrame de los datos
  * ejemplo de nombre: raw_institucion_mes
  */
-class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
-   this.Description = "PRINCIPALES ACTIVOS CONSOLIDADOS POR INSTITUCIONES"
-   this.GroupName = "poc_cmf"
+class raw_entidadAVRO_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
+   this.Description = "Decripción de la interfaz"
+   this.GroupName = "[[yourapplication]]"
    this.setFrequency(huemulType_Frequency.MONTHLY)
    
    //Crea variable para configuración de lectura del archivo
    val CurrentSetting: huemul_DataLakeSetting = new huemul_DataLakeSetting(huemulBigDataGov)
    //setea la fecha de vigencia de esta configuración
-      .setStartDate(2010,1,1,0,0,0)
-      .setEndDate(2050,12,12,0,0,0)
+     .setStartDate(2010,1,1,0,0,0)
+     .setEndDate(2050,12,12,0,0,0)
    //Configuración de rutas globales
-      .setGlobalPath(huemulBigDataGov.GlobalSettings.RAW_SmallFiles_Path)
+     .setGlobalPath(huemulBigDataGov.GlobalSettings.RAW_SmallFiles_Path)
    //Configura ruta local, se pueden usar comodines
-      .setLocalPath("poc_cmf/")
+     .setLocalPath("[[yourapplication]]/")
    //configura el nombre del archivo (se pueden usar comodines)
-      .setFileName("instituciones{{YYYY}}{{MM}}_cmf.csv")
+     .setFileName("[[name_avro_file.avro]]")
    //especifica el tipo de archivo a leer
-     .setFileType(huemulType_FileType.TEXT_FILE)
+     .setFileType(huemulType_FileType.AVRO_FILE)
    //expecifica el nombre del contacto del archivo en TI
-     .setContactName("CMF")
+     .setContactName("[[nombre de contacto del origen]]")
+
    //Indica como se lee el archivo
      .setColumnDelimiterType(huemulType_Separator.CHARACTER)  //POSITION;CHARACTER
    //separador de columnas
-     .setColumnDelimiter(";")    //SET FOR CARACTER
+     .setColumnDelimiter("\t")    //SET FOR CARACTER
    //forma rápida de configuración de columnas del archivo
    //CurrentSetting.DataSchemaConf.setHeaderColumnsString("institucion_id;institucion_nombre")
    //Forma detallada
-     .addColumn("institucion_id", "institucion_id", DecimalType(10,0), "institucion_id")
-     .addColumn("institucion_desc", "institucion_desc", StringType, "institucion_desc")
-        
-
+     .addColumn("ejemplo_producto_id", "pk", IntegerType, "codigo del producto")
+     .addColumn("fecha_venta", "fecven", StringType, "fecha de la venta")
+     .addColumn("cantidad", "cant", DecimalType(10,2), "Cantidad del producto")
+     .addColumn("precio", "prec", DecimalType(10,2), "Precio de la transaccion")
+    
    //Seteo de lectura de información de Log (en caso de tener)
-     .setHeaderColumnDelimiterType(huemulType_Separator.CHARACTER)  //POSITION;CHARACTER;NONE
-     .setHeaderColumnDelimiter(";")
-     .setHeaderColumnsString("VACIO")
-     .setLogNumRowsColumnName(null)
+      .setHeaderColumnDelimiterType(huemulType_Separator.NONE)  //POSITION;CHARACTER;NONE
+      .setLogNumRowsColumnName(null)
+      .setHeaderColumnDelimiter(";")    //SET FOR CARACTER
+      .setHeaderColumnsString("VACIO")
+
 
    this.SettingByDate.append(CurrentSetting)
   
@@ -59,7 +62,7 @@ class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: h
    * ano: año de los archivos recibidos <br>
    * mes: mes de los archivos recibidos <br>
    * dia: dia de los archivos recibidos <br>
-   * Retorna: true si todo está OK, false si tuvo algún problema <br>
+   * Retorna: true si está OK, false si tuvo algún problema <br>
   */
   def open(Alias: String, ControlParent: huemul_Control, ano: Integer, mes: Integer, dia: Integer, hora: Integer, min: Integer, seg: Integer): Boolean = {
     //Crea registro de control de procesos
@@ -76,32 +79,24 @@ class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: h
         control.RaiseError(s"Error al abrir archivo: ${this.Error.ControlError_Message}")
       }
    
-      control.NewStep("Aplicando Filtro")
-      //Si el archivo no tiene cabecera, comentar la línea de .filter
-      val rowRDD = this.DataRDD
-            //filtro para considerar solo las filas que los tres primeros caracteres son numéricos
-            //.filter { x => x.length()>=4 && huemulBigDataGov.isAllDigits(x.substring(0, 3) )  }
-            //filtro para dejar fuera la primera fila
-            .filter { x => x != this.Log.DataFirstRow  }
-            .map { x => this.ConvertSchema(x) }
+      control.NewStep("Aplicando Filtro")      
             
       control.NewStep("Transformando datos a dataframe")      
       //Crea DataFrame en Data.DataDF
-      this.DF_from_RAW(rowRDD, Alias)
+      this.DF_from_RAW(this.DataRawDF, Alias)
         
       //****VALIDACION DQ*****
       //**********************
-      control.NewStep("Valida que cantidad de registros esté entre 0 y 100")    
+      control.NewStep("Valida que cantidad de registros esté entre 10 y 100")    
       //validacion cantidad de filas
-      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 0, 400)      
+      val validanumfilas = this.DataFramehuemul.DQ_NumRowsInterval(this, 10, 100)      
       if (validanumfilas.isError) control.RaiseError(s"user: Numero de Filas fuera del rango. ${validanumfilas.Description}")
                         
       control.FinishProcessOK                      
     } catch {
       case e: Exception =>
         control.Control_Error.GetError(e, this.getClass.getName, null)
-        control.FinishProcessError()   
-
+        control.FinishProcessError()
     }         
 
     control.Control_Error.IsOK()
@@ -113,7 +108,7 @@ class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: h
  * Este objeto se utiliza solo para probar la lectura del archivo RAW
  * La clase que está definida más abajo se utiliza para la lectura.
  */
-object raw_institucion_mes_test {
+object raw_entidadAVRO_mes_test {
    /**
    * El proceso main es invocado cuando se ejecuta este código
    * Permite probar la configuración del archivo RAW
@@ -131,7 +126,7 @@ object raw_institucion_mes_test {
     val param_mes = huemulBigDataGov.arguments.GetValue("mes", null, "Debe especificar el parámetro mes, ej: mes=12").toInt
     
     //Inicializa clase RAW  
-    val DF_RAW =  new raw_institucion_mes(huemulBigDataGov, Control)
+    val DF_RAW =  new raw_entidadAVRO_mes(huemulBigDataGov, Control)
     if (!DF_RAW.open("DF_RAW", null, param_ano, param_mes, 0, 0, 0, 0)) {
       println("************************************************************")
       println("**********  E  R R O R   E N   P R O C E S O   *************")

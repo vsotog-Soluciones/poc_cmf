@@ -13,14 +13,14 @@ import com.soluciones.settings._
 //import com.huemulsolutions.bigdata.dataquality._
 
 
-object process_poc_cmf_activosbanco_mes {
+object process_entidad_mes {
   
   /**
    * Este codigo se ejecuta cuando se llama el JAR desde spark2-submit. el codigo esta preparado para hacer reprocesamiento masivo.
   */
   def main(args : Array[String]) {
     //Creacion API
-    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_institucion_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
+    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_yourapplication_entidad_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
     
     /*************** PARAMETROS **********************/
     var param_ano = huemulBigDataGov.arguments.GetValue("ano", null, "Debe especificar el parametro año, ej: ano=2017").toInt
@@ -69,39 +69,31 @@ object process_poc_cmf_activosbanco_mes {
       Control.AddParamMonth("param_mes", param_mes)
       
       
-    
+      /*************** ABRE RAW DESDE DATALAKE **********************/
+      Control.NewStep("Abre DataLake")  
+      val DF_RAW =  new raw_entidad_mes(huemulBigDataGov, Control)
+      if (!DF_RAW.open("DF_RAW", Control, param_ano, param_mes, 1, 0, 0, 0))       
+        Control.RaiseError(s"error encontrado, abortar: ${DF_RAW.Error.ControlError_Message}")
+      
+      
       /*********************************************************/
       /*************** LOGICAS DE NEGOCIO **********************/
       /*********************************************************/
       //instancia de clase tbl_yourapplication_entidad_mes 
-      val huemulTable = new tbl_poc_cmf_activosbanco_mes(huemulBigDataGov, Control)
-
-      //val tbl_poc_cmf_product_mes = new tbl_poc_cmf_product_mes(huemulBigDataGov, Control)
-      //val tbl_poc_cmf_product_mes_data = huemulBigDataGov.DF_ExecuteQuery("df_ins",s"""select TBL_POC_CMF_PRODUCT_MES.PRODUCTO_ID , TBL_POC_CMF_PRODUCT_MES.PRODUCT_DESC from ${tbl_poc_cmf_product_mes.getTable()}​​""").collect()
-      
-
-      //val tbl_poc_cmf_institucion_mes= new tbl_poc_cmf_institucion_mes(huemulBigDataGov, Control)
-      //val tbl_poc_cmf_institucion_mes_data = huemulBigDataGov.DF_ExecuteQuery("df_ins",s"""select TBL_POC_CMF_INSTITUCION_MES.INSTITUCION_ID, TBL_POC_CMF_INSTITUCION_MES.INSTITUCION_DESC from ${​​tbl_instituciones.getTable()}​​""").collect()
-
-     // val tbl_poc_cmf_activosbanco2_mes = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control)
-     // val tbl_poc_cmf_activosbanco2_mes_data = huemulBigDataGov.DF_ExecuteQuery("df_ins",s"""select * from ${​​tbl_poc_cmf_activosbanco2_mes.getTable()}​​""").collect()
-
-
-      val itbl_poc_cmf_product_mes = new tbl_poc_cmf_product_mes(huemulBigDataGov, Control)
-      val itbl_poc_cmf_institucion_mes = new tbl_poc_cmf_institucion_mes(huemulBigDataGov, Control)
-      val itbl_poc_cmf_activosbanco2_mes = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control)
+      val huemulTable = new tbl_yourapplication_entidad_mes(huemulBigDataGov, Control)
       
       Control.NewStep("Generar Logica de Negocio")
       huemulTable.DF_from_SQL("FinalRAW"
-                          , s""" SELECT p.producto_id as producto_id, i.institucion_id as institucion_id,
-                                ab2.monto as monto,ab2.periodo_mes as periodo_mes
-                                FROM  ${itbl_poc_cmf_activosbanco2_mes.getTable()} as ab2
-                                INNER JOIN ${itbl_poc_cmf_product_mes.getTable()} as p ON ab2.producto = p.product_desc
-                                INNER JOIN ${itbl_poc_cmf_institucion_mes.getTable()} as i ON ab2.instituciones = i.institucion_desc
-                              """)
+                          , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
+                                     ,ejemplo_producto_id
+                                     ,fecha_venta
+                                     ,cantidad
+                                     ,precio
 
+                               FROM DF_RAW""")
       
-     
+      DF_RAW.DataFramehuemul.DataFrame.unpersist()
+      
       //comentar este codigo cuando ya no sea necesario generar estadisticas de las columnas.
       Control.NewStep("QUITAR!!! Generar Estadisticas de las columnas SOLO PARA PRIMERA EJECUCION")
       huemulTable.DataFramehuemul.DQ_StatsAllCols(Control, huemulTable)        
@@ -109,11 +101,10 @@ object process_poc_cmf_activosbanco_mes {
       Control.NewStep("Asocia columnas de la tabla con nombres de campos de SQL")
       
       huemulTable.periodo_mes.setMapping("periodo_mes")
-      huemulTable.institucion_id.setMapping("institucion_id")
-      huemulTable.producto_id.setMapping("producto_id")
-      huemulTable.monto.setMapping("monto")
-   
-      
+      huemulTable.ejemplo_producto_id.setMapping("ejemplo_producto_id")
+      huemulTable.fecha_venta.setMapping("fecha_venta")
+      huemulTable.cantidad.setMapping("cantidad")
+      huemulTable.precio.setMapping("precio")
 
       // huemulTable.setApplyDistinct(false) //deshabilitar si DF tiene datos únicos, por default está habilitado      
       

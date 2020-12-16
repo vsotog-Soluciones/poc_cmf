@@ -13,14 +13,14 @@ import com.soluciones.settings._
 //import com.huemulsolutions.bigdata.dataquality._
 
 
-object process_institucion_mes {
+object process_activosbanco2_mes {
   
   /**
    * Este codigo se ejecuta cuando se llama el JAR desde spark2-submit. el codigo esta preparado para hacer reprocesamiento masivo.
   */
   def main(args : Array[String]) {
     //Creacion API
-    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_institucion_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
+    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_activosbanco2_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
     
     /*************** PARAMETROS **********************/
     var param_ano = huemulBigDataGov.arguments.GetValue("ano", null, "Debe especificar el parametro año, ej: ano=2017").toInt
@@ -71,7 +71,7 @@ object process_institucion_mes {
       
       /*************** ABRE RAW DESDE DATALAKE **********************/
       Control.NewStep("Abre DataLake")  
-      val DF_RAW =  new raw_institucion_mes(huemulBigDataGov, Control)
+      val DF_RAW =  new raw_activosbanco2_mes(huemulBigDataGov, Control)
       if (!DF_RAW.open("DF_RAW", Control, param_ano, param_mes, 1, 0, 0, 0))       
         Control.RaiseError(s"error encontrado, abortar: ${DF_RAW.Error.ControlError_Message}")
       
@@ -80,16 +80,16 @@ object process_institucion_mes {
       /*************** LOGICAS DE NEGOCIO **********************/
       /*********************************************************/
       //instancia de clase tbl_yourapplication_entidad_mes 
-      val huemulTable = new tbl_poc_cmf_institucion_mes(huemulBigDataGov, Control)
+      val huemulTable = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control)
       
       Control.NewStep("Generar Logica de Negocio")
       huemulTable.DF_from_SQL("FinalRAW"
                           , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
-                                    ,institucion_id
-                                    ,institucion_desc
-                    
+                                    ,Instituciones
+                                    ,Producto
+                                    ,Monto
 
-                               FROM DF_RAW """)
+                               FROM DF_RAW""")
       
       DF_RAW.DataFramehuemul.DataFrame.unpersist()
       
@@ -100,9 +100,9 @@ object process_institucion_mes {
       Control.NewStep("Asocia columnas de la tabla con nombres de campos de SQL")
       
       huemulTable.periodo_mes.setMapping("periodo_mes")
-      huemulTable.institucion_id.setMapping("institucion_id")
-      huemulTable.institucion_desc.setMapping("institucion_desc")
-   
+      huemulTable.instituciones.setMapping("Instituciones")
+      huemulTable.producto.setMapping("Producto")
+      huemulTable.monto.setMapping("Monto")
       
 
       // huemulTable.setApplyDistinct(false) //deshabilitar si DF tiene datos únicos, por default está habilitado      
