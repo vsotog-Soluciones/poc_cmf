@@ -14,7 +14,7 @@ import com.soluciones.settings.globalSettings._
  * Clase que permite abrir un archivo de texto, devuelve un objeto huemul_dataLake con un DataFrame de los datos
  * ejemplo de nombre: raw_institucion_mes
  */
-class raw_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
+class raw_product_N1(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
    this.Description = "PRINCIPALES ACTIVOS CONSOLIDADOS POR INSTITUCIONES"
    this.GroupName = "poc_cmf"
    this.setFrequency(huemulType_Frequency.MONTHLY)
@@ -29,7 +29,7 @@ class raw_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemu
    //Configura ruta local, se pueden usar comodines
       .setLocalPath("poc_cmf/")
    //configura el nombre del archivo (se pueden usar comodines)
-      .setFileName("productos{{YYYY}}{{MM}}_cmf.csv")
+      .setFileName("Prod_N1.csv")
    //especifica el tipo de archivo a leer
      .setFileType(huemulType_FileType.TEXT_FILE)
    //expecifica el nombre del contacto del archivo en TI
@@ -41,10 +41,9 @@ class raw_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemu
    //forma rápida de configuración de columnas del archivo
    //CurrentSetting.DataSchemaConf.setHeaderColumnsString("institucion_id;institucion_nombre")
    //Forma detallada
-     .addColumn("producto_id", "producto_id", DecimalType(10,0), "producto_id")
-     .addColumn("product_desc", "product_desc", StringType, "product_desc")
-     .addColumn("Prod_n5_id", "Prod_n5_id", StringType , "Prod_n5_id")
-     .addColumn("prod_Path", "prod_Path", StringType, "prod_Path")     
+     .addColumn("Prod_n1_id", "Prod_n1_id", DecimalType(10,0), "Prod_n1_id")
+     .addColumn("Prod_n1_desc", "Prod_n2_desc", StringType, "Prod_n1_desc")
+     
 
    //Seteo de lectura de información de Log (en caso de tener)
      .setHeaderColumnDelimiterType(huemulType_Separator.CHARACTER)  //POSITION;CHARACTER;NONE
@@ -114,7 +113,7 @@ class raw_product_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemu
  * Este objeto se utiliza solo para probar la lectura del archivo RAW
  * La clase que está definida más abajo se utiliza para la lectura.
  */
-object raw_product_mes_test {
+object raw_product_N1 {
    /**
    * El proceso main es invocado cuando se ejecuta este código
    * Permite probar la configuración del archivo RAW
@@ -132,7 +131,7 @@ object raw_product_mes_test {
     val param_mes = huemulBigDataGov.arguments.GetValue("mes", null, "Debe especificar el parámetro mes, ej: mes=12").toInt
     
     //Inicializa clase RAW  
-    val DF_RAW =  new raw_product_mes(huemulBigDataGov, Control)
+    val DF_RAW =  new raw_product_N1(huemulBigDataGov, Control)
     if (!DF_RAW.open("DF_RAW", null, param_ano, param_mes, 0, 0, 0, 0)) {
       println("************************************************************")
       println("**********  E  R R O R   E N   P R O C E S O   *************")

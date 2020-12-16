@@ -14,7 +14,7 @@ import com.soluciones.settings.globalSettings._
  * Clase que permite abrir un archivo de texto, devuelve un objeto huemul_dataLake con un DataFrame de los datos
  * ejemplo de nombre: raw_institucion_mes
  */
-class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
+class raw_institucion(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_DataLake(huemulBigDataGov, Control) with Serializable  {
    this.Description = "PRINCIPALES ACTIVOS CONSOLIDADOS POR INSTITUCIONES"
    this.GroupName = "poc_cmf"
    this.setFrequency(huemulType_Frequency.MONTHLY)
@@ -29,7 +29,7 @@ class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: h
    //Configura ruta local, se pueden usar comodines
       .setLocalPath("poc_cmf/")
    //configura el nombre del archivo (se pueden usar comodines)
-      .setFileName("instituciones{{YYYY}}{{MM}}_cmf.csv")
+      .setFileName("instituciones_cmf.csv")
    //especifica el tipo de archivo a leer
      .setFileType(huemulType_FileType.TEXT_FILE)
    //expecifica el nombre del contacto del archivo en TI
@@ -113,7 +113,7 @@ class raw_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: h
  * Este objeto se utiliza solo para probar la lectura del archivo RAW
  * La clase que está definida más abajo se utiliza para la lectura.
  */
-object raw_institucion_mes_test {
+object raw_institucion_test {
    /**
    * El proceso main es invocado cuando se ejecuta este código
    * Permite probar la configuración del archivo RAW
@@ -131,7 +131,7 @@ object raw_institucion_mes_test {
     val param_mes = huemulBigDataGov.arguments.GetValue("mes", null, "Debe especificar el parámetro mes, ej: mes=12").toInt
     
     //Inicializa clase RAW  
-    val DF_RAW =  new raw_institucion_mes(huemulBigDataGov, Control)
+    val DF_RAW =  new raw_institucion(huemulBigDataGov, Control)
     if (!DF_RAW.open("DF_RAW", null, param_ano, param_mes, 0, 0, 0, 0)) {
       println("************************************************************")
       println("**********  E  R R O R   E N   P R O C E S O   *************")

@@ -7,10 +7,10 @@ import com.huemulsolutions.bigdata.tables._
 import org.apache.spark.sql.types._
 
 
-class tbl_poc_cmf_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
+class tbl_poc_cmf_product_N2(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
   /**********   C O N F I G U R A C I O N   D E   L A   T A B L A   ****************************************/
   //Tipo de tabla, Master y Reference son catalogos sin particiones de periodo
-  this.setTableType(huemulType_Tables.Transaction)
+  this.setTableType(huemulType_Tables.Master)
   //Base de Datos en HIVE donde sera creada la tabla
   this.setDataBase(huemulBigDataGov.GlobalSettings.MASTER_DataBase)
   //Tipo de archivo que sera almacenado en HDFS
@@ -64,18 +64,18 @@ class tbl_poc_cmf_institucion_mes(huemulBigDataGov: huemul_BigDataGovernance, Co
 
     //Columna de periodo
 
-  val periodo_mes: huemul_Columns = new huemul_Columns (StringType, true,"periodo de los datos")
-      .setIsPK()
-      .securityLevel(huemulType_SecurityLevel.Public)  
-      .setPartitionColumn(1, dropBeforeInsert = true, oneValuePerProcess = true)
-      .setBusinessGlossary("BG001")
-   val institucion_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "institucion_id")
+ 
+   val producto_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "Prod_n2_id")
           .setIsPK()        
           .securityLevel(huemulType_SecurityLevel.Public)   
 
-      val institucion_desc: huemul_Columns = new huemul_Columns (StringType, true, "institucion_desc")
-          .setIsPK()        
-          .securityLevel(huemulType_SecurityLevel.Public)                 
+  val product_desc: huemul_Columns = new huemul_Columns (StringType, true, "Prod_n2_desc")      
+          .securityLevel(huemulType_SecurityLevel.Public)  
+
+   val Prod_n1_id: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Prod_n1_id")       
+          .securityLevel(huemulType_SecurityLevel.Public)  
+
+               
   
 
         

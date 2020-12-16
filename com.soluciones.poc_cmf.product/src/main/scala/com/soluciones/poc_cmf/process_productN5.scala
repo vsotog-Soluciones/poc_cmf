@@ -13,14 +13,14 @@ import com.soluciones.settings._
 //import com.huemulsolutions.bigdata.dataquality._
 
 
-object process_product_mes {
+object process_product_N5 {
   
   /**
    * Este codigo se ejecuta cuando se llama el JAR desde spark2-submit. el codigo esta preparado para hacer reprocesamiento masivo.
   */
   def main(args : Array[String]) {
     //Creacion API
-    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_product_mes - ${this.getClass.getSimpleName}", args, globalSettings.Global)
+    val huemulBigDataGov  = new huemul_BigDataGovernance(s"Masterizacion tabla tbl_poc_cmf_product_N5 - ${this.getClass.getSimpleName}", args, globalSettings.Global)
     
     /*************** PARAMETROS **********************/
     var param_ano = huemulBigDataGov.arguments.GetValue("ano", null, "Debe especificar el parametro año, ej: ano=2017").toInt
@@ -71,7 +71,7 @@ object process_product_mes {
       
       /*************** ABRE RAW DESDE DATALAKE **********************/
       Control.NewStep("Abre DataLake")  
-      val DF_RAW =  new raw_product_mes(huemulBigDataGov, Control)
+      val DF_RAW =  new raw_product_N5(huemulBigDataGov, Control)
       if (!DF_RAW.open("DF_RAW", Control, param_ano, param_mes, 1, 0, 0, 0))       
         Control.RaiseError(s"error encontrado, abortar: ${DF_RAW.Error.ControlError_Message}")
       
@@ -80,16 +80,14 @@ object process_product_mes {
       /*************** LOGICAS DE NEGOCIO **********************/
       /*********************************************************/
       //instancia de clase tbl_yourapplication_entidad_mes 
-      val huemulTable = new tbl_poc_cmf_product_mes(huemulBigDataGov, Control)
+      val huemulTable = new tbl_poc_cmf_product_N5(huemulBigDataGov, Control)
       
       Control.NewStep("Generar Logica de Negocio")
       huemulTable.DF_from_SQL("FinalRAW"
-                          , s"""SELECT TO_DATE("$param_ano-$param_mes-1") as periodo_mes
-                                    ,producto_id
-                                    ,product_desc
-                                    ,Prod_n5_id
-                                    ,prod_Path
-
+                          , s"""SELECT 
+                                     Prod_n5_id
+                                    ,Prod_n5_desc
+                                    ,Prod_n4_id
                                FROM DF_RAW """)
       
       DF_RAW.DataFramehuemul.DataFrame.unpersist()
@@ -100,11 +98,11 @@ object process_product_mes {
       
       Control.NewStep("Asocia columnas de la tabla con nombres de campos de SQL")
       
-      huemulTable.periodo_mes.setMapping("periodo_mes")
-      huemulTable.producto_id.setMapping("producto_id")
-      huemulTable.product_desc.setMapping("product_desc")
+     
       huemulTable.Prod_n5_id.setMapping("Prod_n5_id")
-      huemulTable.prod_Path.setMapping("prod_Path")
+      huemulTable.Prod_n5_desc.setMapping("Prod_n5_desc")
+      huemulTable.Prod_n4_id.setMapping("Prod_n4_id")
+    
      
       
 
