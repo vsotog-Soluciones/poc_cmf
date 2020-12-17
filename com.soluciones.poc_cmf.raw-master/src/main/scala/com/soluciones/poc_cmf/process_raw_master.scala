@@ -13,17 +13,18 @@ import com.soluciones.settings._
 //import com.huemulsolutions.bigdata.dataquality._
 
 
-object process_mensual {
+object process_raw_master {
   def main(args: Array[String]): Unit = {
-    process_activosbanco1_mes.main(args)
-    process_activosbanco2_mes.main(args)
-    process_product.main(args)
-    process_productN1.main(args)
-    process_productN2.main(args)
-    process_productN3.main(args)
-    process_productN4.main(args)
-    process_productN5.main(args)
     process_institucion.main(args)
+    process_product.main(args)
+    process_product_N1.main(args)
+    process_product_N2.main(args)
+    process_product_N3.main(args)
+    process_product_N4.main(args)
+    process_product_N5.main(args)
+    process_activosbanco.main(args)
+    //process_product.main(args)
+
  
    
   }

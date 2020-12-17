@@ -7,7 +7,7 @@ import com.huemulsolutions.bigdata.tables._
 import org.apache.spark.sql.types._
 
 
-class tbl_poc_cmf_activosbanco_test_mes(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
+class tbl_poc_cmf_activosbanco(huemulBigDataGov: huemul_BigDataGovernance, Control: huemul_Control) extends huemul_Table(huemulBigDataGov, Control) with Serializable {
   /**********   C O N F I G U R A C I O N   D E   L A   T A B L A   ****************************************/
   //Tipo de tabla, Master y Reference son catalogos sin particiones de periodo
   this.setTableType(huemulType_Tables.Transaction)
@@ -25,6 +25,8 @@ class tbl_poc_cmf_activosbanco_test_mes(huemulBigDataGov: huemul_BigDataGovernan
   this.setFrequency(huemulType_Frequency.MONTHLY)
   //permite asignar un código de error personalizado al fallar la PK
   this.setPK_externalCode("COD_ERROR")
+
+  //this.setNumPartitions(3)
     
   /**********   O P T I M I Z A C I O N  ****************************************/
   //nuevo desde version 2.0
@@ -63,23 +65,33 @@ class tbl_poc_cmf_activosbanco_test_mes(huemulBigDataGov: huemul_BigDataGovernan
   /**********   C O L U M N A S   ****************************************/
 
     //Columna de periodo
-  val periodo_mes: huemul_Columns = new huemul_Columns (StringType, true,"periodo de los datos")
-      .setIsPK()
-      .securityLevel(huemulType_SecurityLevel.Public)  
-      .setPartitionColumn(1, dropBeforeInsert = true, oneValuePerProcess = true)
-      .setBusinessGlossary("BG001")
-
-  val instituciones_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "Id Instituciones")
-          .setIsPK()        
-          .securityLevel(huemulType_SecurityLevel.Public)  
   
-  val producto: huemul_Columns = new huemul_Columns (StringType, true, "Producto")
-          .setIsPK()        
-          .securityLevel(huemulType_SecurityLevel.Public)  
+  val periodo_mes: huemul_Columns = new huemul_Columns (StringType, true,"periodo de los datos")
+        .setIsPK()
+        .setPartitionColumn(1)
+        
+
+  val institucion_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "Id Instituciones")       
+        .setIsPK()
+  
+  val producto_id: huemul_Columns = new huemul_Columns (DecimalType(10,0), true, "producto_id")   
+       .setIsPK()
 
   val monto: huemul_Columns = new huemul_Columns (DecimalType(10,2), true, "Monto")
-          .setIsPK()        
-          .securityLevel(huemulType_SecurityLevel.Public)          
+       .setNullable()           
+
+
+          //**********Ejemplo para aplicar DataQuality de Integridad Referencial
+  val tabla_instituciones = new tbl_poc_cmf_institucion(huemulBigDataGov,Control)
+  val fk_tbl_poc_cmf_institucion = new huemul_Table_Relationship(tabla_instituciones, false)
+  fk_tbl_poc_cmf_institucion.AddRelationship(tabla_instituciones.institucion_id , institucion_id)
+  
+  
+  val tabla_productos = new tbl_poc_cmf_product(huemulBigDataGov,Control)
+  val fk_tbl_poc_cmf_product = new huemul_Table_Relationship(tabla_productos, false)
+  fk_tbl_poc_cmf_product.AddRelationship(tabla_productos.producto_id, producto_id)
+
+
   
   //**********Atributos adicionales de DataQuality 
   /*
