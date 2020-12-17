@@ -83,7 +83,10 @@ object process_tablon_salida {
       //instancia de clase tbl_yourapplication_entidad_mes 
       
 
-      var tablamaster_activo = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control) //operac_rut
+      var tablamaster_activo = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control) //activos
+      var tablamaster_producto = new tbl_poc_cmf_product(huemulBigDataGov, Control) //producto
+      var tablamaster_institucion = new tbl_poc_cmf_institucion(huemulBigDataGov, Control) //instituciones
+
       //var tabladim_sucursal = new tbl_dim_sucursal(huemulBigDataGov, Control) //duda
       //var tabladim_modotasa = new tbl_dim_modotasa(huemulBigDataGov, Control)
       //var tabladim_tipocredito = new tbl_dim_tipocredito(huemulBigDataGov, Control)
@@ -100,13 +103,19 @@ object process_tablon_salida {
       huemulTable.DF_from_SQL("tablon"
                           , s"""
                                 SELECT  $mes AS periodo_mes
-                                    ,Instituciones
-                                    ,Producto
+                                    ,inst.institucion_desc as institucion_desc
+                                    ,prod.product_desc as Producto
                                     ,SUM( CASE WHEN periodo_mes = '$periodo_mes' THEN Monto ELSE 0 END) as Monto
                                     ,SUM( CASE WHEN periodo_mes = '$periodo_mesAnt' THEN Monto ELSE 0 END)  as Monto_ant
-                               FROM ${tablamaster_activo.getTable()} 
+                               FROM ${tablamaster_activo.getTable()}  tbl
+                               INNER JOIN ${tablamaster_producto.getTable()}  prod
+                               ON (tbl.producto_id = prod.producto_id)
+                               INNER JOIN ${tablamaster_institucion.getTable()}  inst
+                               ON (tbl.institucion_id = inst.institucion_id)
+
                                WHERE  periodo_mes in ('$periodo_mes','$periodo_mesAnt')
-                               GROUP BY Instituciones , Producto
+                               AND prod.producto_id IN (2011221, 2011231 , 2011321, 2011331, 2012211, 2012432, 2012433, 2012434)
+                               GROUP BY inst.institucion_desc , prod.product_desc
                                """)
       
       //tablamaster_activo.DataFramehuemul.DataFrame.unpersist()
@@ -118,7 +127,7 @@ object process_tablon_salida {
       Control.NewStep("Asocia columnas de la tabla con nombres de campos de SQL")
       
       huemulTable.periodo_mes.setMapping("periodo_mes")
-      huemulTable.institucion_nom.setMapping("Instituciones")
+      huemulTable.institucion_nom.setMapping("institucion_desc")
       huemulTable.producto_nom.setMapping("Producto")
       huemulTable.activo_mon.setMapping("Monto")
       huemulTable.activo_mon_mes_ant.setMapping("Monto_ant")
