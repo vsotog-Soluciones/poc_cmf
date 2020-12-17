@@ -13,16 +13,9 @@ import com.soluciones.settings._
 //import com.huemulsolutions.bigdata.dataquality._
 
 
-object process_raw_master {
+object process_raw_transaction {
   def main(args: Array[String]): Unit = {
-    process_institucion.main(args)
-    process_product.main(args)
-    process_product_N1.main(args)
-    process_product_N2.main(args)
-    process_product_N3.main(args)
-    process_product_N4.main(args)
-    process_product_N5.main(args)
-    //process_activosbanco.main(args)
+    process_activosbanco.main(args)
     //process_product.main(args)
 
  
