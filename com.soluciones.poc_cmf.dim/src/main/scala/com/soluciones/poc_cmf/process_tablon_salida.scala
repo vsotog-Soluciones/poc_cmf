@@ -83,7 +83,7 @@ object process_tablon_salida {
       //instancia de clase tbl_yourapplication_entidad_mes 
       
 
-      var tablamaster_activo = new tbl_poc_cmf_activosbanco2_mes(huemulBigDataGov, Control) //activos
+      var tablamaster_activo = new tbl_poc_cmf_activosbanco(huemulBigDataGov, Control) //activos
       var tablamaster_producto = new tbl_poc_cmf_product(huemulBigDataGov, Control) //producto
       var tablamaster_institucion = new tbl_poc_cmf_institucion(huemulBigDataGov, Control) //instituciones
 
@@ -104,7 +104,7 @@ object process_tablon_salida {
                           , s"""
                                 SELECT  $mes AS periodo_mes
                                     ,inst.institucion_desc as institucion_desc
-                                    ,prod.product_desc as Producto
+                                    ,prod.prod_Path as Producto
                                     ,SUM( CASE WHEN periodo_mes = '$periodo_mes' THEN Monto ELSE 0 END) as Monto
                                     ,SUM( CASE WHEN periodo_mes = '$periodo_mesAnt' THEN Monto ELSE 0 END)  as Monto_ant
                                FROM ${tablamaster_activo.getTable()}  tbl
@@ -115,7 +115,7 @@ object process_tablon_salida {
 
                                WHERE  periodo_mes in ('$periodo_mes','$periodo_mesAnt')
                                AND prod.producto_id IN (2011221, 2011231 , 2011321, 2011331, 2012211, 2012432, 2012433, 2012434)
-                               GROUP BY inst.institucion_desc , prod.product_desc
+                               GROUP BY inst.institucion_desc , prod.prod_Path
                                """)
       
       //tablamaster_activo.DataFramehuemul.DataFrame.unpersist()
