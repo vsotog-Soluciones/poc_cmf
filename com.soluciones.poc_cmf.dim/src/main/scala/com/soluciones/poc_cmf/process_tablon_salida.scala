@@ -114,7 +114,7 @@ object process_tablon_salida {
                                ON (tbl.institucion_id = inst.institucion_id)
 
                                WHERE  periodo_mes in ('$periodo_mes','$periodo_mesAnt')
-                               AND prod.producto_id IN (2011221, 2011231 , 2011321, 2011331, 2012211, 2012432, 2012433, 2012434)
+                               AND prod.producto_id > 2011111
                                GROUP BY inst.institucion_desc , prod.prod_Path
                                """)
       
