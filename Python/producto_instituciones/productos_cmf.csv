@@ -1,0 +1,40 @@
+producto_id;product_desc;Prod_n5_id;prod_Path
+1011111;Colocaciones (1);101111;Colocaciones (1)
+1021111;Efectivo y depósitos en bancos;102111;Efectivo y depósitos en bancos
+1031111;Instrumentos financieros no derivados;103111;Instrumentos financieros no derivados
+1041111;Instrumentos financieros derivados;104111;Instrumentos financieros derivados
+1051111;Contratos de retrocompra y préstamos de valores (activos);105111;Contratos de retrocompra y préstamos de valores (activos)
+1061111;Inversiones en sociedades y en sucursales en el exterior;106111;Inversiones en sociedades y en sucursales en el exterior
+1071111;Activo fijo;107111;Activo fijo
+1081111;Activo por derecho a usar bienes en arrendamiento;108111;Activo por derecho a usar bienes en arrendamiento
+1091111;Activos Totales;109111;Activos Totales
+1101111;Créditos contingentes;110111;Créditos contingentes
+1111111;Colocaciones de comercio exterior totales;111111;Colocaciones de comercio exterior totales
+1121111;Operaciones de leasing totales;112111;Operaciones de leasing totales
+1131111;Operaciones de factoraje;113111;Operaciones de factoraje
+1141111;Cartera con morosidad de 90 días o más;114111;Cartera con morosidad de 90 días o más
+1151111;Cartera deteriorada;115111;Cartera deteriorada
+2011111;Total;201111;Activos/Adeudado por bancos (neto de provisiones)/Total
+2011211;Total (1);201121;Activos/Adeudado por bancos (neto de provisiones)/Bancos del país/Total (1)
+2011221;Préstamos interbancarios;201122;Activos/Adeudado por bancos (neto de provisiones)/Bancos del país/Préstamos interbancarios
+2011231;Créditos de comercio exterior;201123;Activos/Adeudado por bancos (neto de provisiones)/Bancos del país/Créditos de comercio exterior
+2011241;Provisiones para créditos con bancos del país;201124;Activos/Adeudado por bancos (neto de provisiones)/Bancos del país/Provisiones para créditos con bancos del país
+2011311;Total (1);201131;Activos/Adeudado por bancos (neto de provisiones)/Bancos del exterior/Total (1)
+2011321;Préstamos interbancarios;201132;Activos/Adeudado por bancos (neto de provisiones)/Bancos del exterior/Préstamos interbancarios
+2011331;Créditos de comercio exterior;201133;Activos/Adeudado por bancos (neto de provisiones)/Bancos del exterior/Créditos de comercio exterior
+2011341;Provisiones para créditos con bancos del exterior;201134;Activos/Adeudado por bancos (neto de provisiones)/Bancos del exterior/Provisiones para créditos con bancos del exterior
+2011411;Banco Central de Chile;201141;Activos/Adeudado por bancos (neto de provisiones)/Banco Central de Chile
+2012111;Total (1);201211;Activos/Créditos y cuentas por cobrar a clientes /Total (1)
+2012211;Provisiones constituidas de créd. y ctas. por cob. a clientes;201221;Activos/Créditos y cuentas por cobrar a clientes /Provisiones constituidas de créd. y ctas. por cob. a clientes
+2012311;Colocaciones;201231;Activos/Créditos y cuentas por cobrar a clientes /Colocaciones comerciales (empresas) (1)/Colocaciones
+2012321;Provisiones;201232;Activos/Créditos y cuentas por cobrar a clientes /Colocaciones comerciales (empresas) (1)/Provisiones
+2012411;Total;201241;Activos/Créditos y cuentas por cobrar a clientes /Personas/Total
+2012421;Provisiones;201242;Activos/Créditos y cuentas por cobrar a clientes /Personas/Provisiones
+2012431;Total;201243;Activos/Créditos y cuentas por cobrar a clientes /Personas/Consumo (1)/Total
+2012432;En cuotas;201243;Activos/Créditos y cuentas por cobrar a clientes /Personas/Consumo (1)/En cuotas
+2012433;Tarjetas de crédito;201243;Activos/Créditos y cuentas por cobrar a clientes /Personas/Consumo (1)/Tarjetas de crédito
+2012434;Otros;201243;Activos/Créditos y cuentas por cobrar a clientes /Personas/Consumo (1)/Otros
+2012435;Provisiones;201243;Activos/Créditos y cuentas por cobrar a clientes /Personas/Consumo (1)/Provisiones
+2012441;Colocaciones;201244;Activos/Créditos y cuentas por cobrar a clientes /Personas/Vivienda (1)/Colocaciones
+2012442;Provisiones;201244;Activos/Créditos y cuentas por cobrar a clientes /Personas/Vivienda (1)/Provisiones
+2021111;Colocaciones;202111;Colocaciones
