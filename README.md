@@ -6,7 +6,7 @@ El objetivo de este documento es dar a conocer el alcance de la prueba de concep
 ## CONCEPTOS CLAVES 
 
 
-![](images.png)
+![](com.soluciones.poc_settings-master/images.png)
 
 - CMF: Comisión para el mercado financiero 
 - Activo: Deudas de los clientes 
