@@ -13,7 +13,32 @@ El objetivo de este documento es dar a conocer el alcance de la prueba de concep
 - Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente 
 - Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
 
+## REQUISITOS 
 
+
+
+
+- Python 2.7 y Scala 
+- Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+- Java version "1.8.0_241"
+- Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
+- Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
+
+## Lógica de ejecución 
+ 
+El código genera las entidades de negocio, generando un modelo en tercera 
+forma normal, el cual pueda ser explotado por usuarios finales como estrategia self service. 
+
+Para lograr lo anterior, se debe realizar la ejecucion de un process(process_raw_master), el cual se ejecuta con el siguiente comando : 
+
+sudo -su hdfs spark-submit --master local --jars huemul-bigdatagovernance-2.6.2.jar,huemul-sql-decode-1.0.jar,poc_settings-2.6.2.jar,postgresql-9.4.1212.jar --class com.soluciones.poc_cmf.process_raw_master poc_cmf-2.6.2.jar environment=production,ano=2019,mes=09
+
+el destino de esta es una capa en HDFS, llamada Master. Este último es donde deben reposar las tablas
+(tbl_poc_cmf_institucion,tbl_poc_cmf_product_n1,tbl_poc_cmf_product_n2,tbl_poc_cmf_product_n3,tbl_poc_cmf_product_n4
+tbl_poc_cmf_product_n5,tbl_poc_cmf_product) del modelo de tercera forma normal con formato parquet, tratamiento que debe ser generado con Apache 
+Spark.
+
+![](raw_master.png)
 
 
 
