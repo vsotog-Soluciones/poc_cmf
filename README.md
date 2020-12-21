@@ -8,10 +8,10 @@ El objetivo de este documento es dar a conocer el alcance de la prueba de concep
 
 ![](images.png)
 
-i. CMF: Comisión para el mercado financiero 
-ii. Activo: Deudas de los clientes 
-iii. Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente 
-iv. Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
+- CMF: Comisión para el mercado financiero 
+- Activo: Deudas de los clientes 
+- Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente 
+- Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
 
 
 
@@ -22,14 +22,14 @@ OS X , Windows y Linux:
 
 ```sh
 
-Python 2.7
-java version "1.8.0_241"
-Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
-Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
-Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
-HDFS y entornos distribuidos
-Shell 
-GIT
+-Python 2.7
+-java version "1.8.0_241"
+-Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
+-Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
+-Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+-HDFS y entornos distribuidos
+-Shell 
+-GIT
 ```
 
 
@@ -60,11 +60,23 @@ OS X , Windows y Linux:
 
 ```sh
 edit autoexec.bat
+
 ```
-  El cual a su vez, reprocesa los 7 distintos procesos para generar nuestro modelo con formato parquet
+    El cual a su vez, reprocesa los 7 distintos procesos para generar nuestro modelo con formato parquet
     generado con Apache Spark
 
-    ![](raw_master.png)
+   
+ ![](raw_master.png)
+
+ Cada uno de estos procesos nos genera una tabla 
+ -tbl_poc_cmf_institucion
+ -tbl_poc_cmf_product_n1
+ -tbl_poc_cmf_product_n2
+ -tbl_poc_cmf_product_n3
+ -tbl_poc_cmf_product_n4
+ -tbl_poc_cmf_product_n5
+ -tbl_poc_cmf_product
+ 
 
 ## Ejemplo de uso
 
