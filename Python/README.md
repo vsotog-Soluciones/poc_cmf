@@ -27,7 +27,7 @@ pip install unicodecsv
 
 El código Python leerá los archivos xlsx que se encuentran en la carpeta “data”, los cuales corresponde a 13 archivos Excel, con información de las cuotas de mercado del sistema bancario chileno.
 
-Una vez leídos se considerarán solo dos pestañas, Activos Bancos 1 y Activos Banco 2, las cuales se convertirán en un csv cada una para cada año-mes. Obteniendo como resultados 26 csv los cuales serán guardados en la capeta “csv_utf_python” en un formato UTF-8. 
+Una vez leídos se considerarán solo dos pestañas, Activos Bancos 1 y Activos Banco 2, las cuales se convertirán en un csv para cada año-mes. Obteniendo como resultado 26 csv, los cuales serán guardados en la capeta “csv_utf_python” en un formato UTF-8. 
 Las rutas de entrada con los 13 archivos se definen en:
 
 * location_excel = 'data/'
