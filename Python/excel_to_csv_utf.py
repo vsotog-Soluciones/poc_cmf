@@ -1,6 +1,5 @@
 import xlrd
 import unicodecsv
-import unicodedata
 import pandas as pd
 import os
 
@@ -217,9 +216,9 @@ def pivot_csv(out_csv):
 
 
 # Ruta de entrada
-location_excel = '/root/poc_cmf/data/'
+location_excel = 'data/'
 # Leer Archivos csv para realizar el pivot
-out_csv = '/root/poc_cmf/csv_utf_python/'  # Ruta de Salida
+out_csv = 'csv_utf_python/'  # Ruta de Salida
 contenido = os.listdir(location_excel)
 
 print contenido
