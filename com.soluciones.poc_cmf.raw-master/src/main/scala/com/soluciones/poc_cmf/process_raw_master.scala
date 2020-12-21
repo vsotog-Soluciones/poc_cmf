@@ -22,8 +22,7 @@ object process_raw_master {
     process_product_N3.main(args)
     process_product_N4.main(args)
     process_product_N5.main(args)
-    //process_activosbanco.main(args)
-    //process_product.main(args)
+
 
  
    
