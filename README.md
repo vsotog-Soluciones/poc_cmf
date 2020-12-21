@@ -6,14 +6,14 @@ El objetivo de este documento es dar a conocer el alcance de la prueba de concep
 ## CONCEPTOS CLAVES 
 
 
-![](Home.png)
+![](images.png)
 
 i. CMF: Comisión para el mercado financiero ii. Activo: Deudas de los clientes iii. Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente iv. Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
 
 
 
 
-## Instalación
+## Lógica de ejecución
 
 OS X , Windows y Linux:
 
@@ -88,13 +88,23 @@ Notificaciones y Middleware
 ## Historial de versiones
 
 * 0.0.1
-    * CAMBIO: Actualizada la documentación (el módulo de código permanece igual)
+    * first commit
+* 0.0.2
+    * CAMBIO: Cambios de POM
+* 0.0.3
+    * CAMBIO: Procesos nuevos
+* 0.0.4
+    * CAMBIO: Incorporación de institucion y producto
+* 0.0.5
+    * CAMBIO: Prueba de Procesos
+* 0.0.6
+    * CAMBIO: Proceso para generar tablon dimensinal                   
 
 
 ## Meta
 
-Jorge Valdes FLores – (@jorgevaldes47) – jorge.valdes.01@alu.ucm.cl
+vsotog-Soluciones - vsotog@soluciones.cl
 
 Distribuido bajo la licencia XYZ. Ver ``LICENSE`` para más información.
 
-[https://github.com/JorgeValdes]
+[https://github.com/vsotog-Soluciones]
