@@ -12,6 +12,29 @@ i. CMF: Comisión para el mercado financiero ii. Activo: Deudas de los clientes 
 
 
 
+## Requisitos
+
+OS X , Windows y Linux:
+
+
+```sh
+
+Python 2.7
+java version "1.8.0_241"
+Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
+Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+HDFS y entornos distribuidos
+Shell 
+GIT
+```
+
+
+
+```sh
+edit autoexec.bat
+```
+
 
 ## Lógica de ejecución
 
@@ -20,17 +43,17 @@ OS X , Windows y Linux:
 
 ```sh
 
-Rename .env.example to .env and fill the options.
+    El código reconoce las entidades de negocio, generando un modelo en tercera forma normal,
+    el cual pueda ser explotado por usuarios finales
 
+    el comando para nuestra ejecucion, para la capa Master es la llamada de nuestro process_raw_master
 
-composer install
-npm install
-php artisan key:generate
-php artisan migrate
-php artisan db:seed
-gulp
-php artisan serve
-```
+    sudo -su hdfs spark-submit --master local --jars huemul-bigdatagovernance-2.6.2.jar,huemul-sql-decode-1.0.jar,poc_settings-2.6.2.jar,postgresql-9.4.1212.jar --class com.soluciones.poc_cmf.process_raw_master poc_cmf-2.6.2.jar environment=production,ano=2019,mes=09.
+
+    El cual a su vez, reprocesa los 7 distintos procesos para generar nuestro modelo con formato parquet
+    generado con Apache Spark
+
+    ![](raw_master.png)
 
 
 
