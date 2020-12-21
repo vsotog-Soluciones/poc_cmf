@@ -8,7 +8,10 @@ El objetivo de este documento es dar a conocer el alcance de la prueba de concep
 
 ![](images.png)
 
-i. CMF: Comisión para el mercado financiero ii. Activo: Deudas de los clientes iii. Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente iv. Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
+i. CMF: Comisión para el mercado financiero 
+ii. Activo: Deudas de los clientes 
+iii. Pasivo: Son las obligaciones que tienen los bancos. Ejemplo: cuenta corriente 
+iv. Cuota de mercado: es la proporción de mercado que consume los productos o servicios de una empresa determinada 
 
 
 
@@ -32,34 +35,36 @@ GIT
 
 
 ```sh
-edit autoexec.bat
+
 ```
 
 
 ## Lógica de ejecución
 
 OS X , Windows y Linux:
-
-
-```sh
-
+   
     El código reconoce las entidades de negocio, generando un modelo en tercera forma normal,
     el cual pueda ser explotado por usuarios finales
 
     el comando para nuestra ejecucion, para la capa Master es la llamada de nuestro process_raw_master
 
+```sh
+
+ 
+
     sudo -su hdfs spark-submit --master local --jars huemul-bigdatagovernance-2.6.2.jar,huemul-sql-decode-1.0.jar,poc_settings-2.6.2.jar,postgresql-9.4.1212.jar --class com.soluciones.poc_cmf.process_raw_master poc_cmf-2.6.2.jar environment=production,ano=2019,mes=09.
 
-    El cual a su vez, reprocesa los 7 distintos procesos para generar nuestro modelo con formato parquet
-    generado con Apache Spark
-
-    ![](raw_master.png)
+  
 
 
 
 ```sh
 edit autoexec.bat
 ```
+  El cual a su vez, reprocesa los 7 distintos procesos para generar nuestro modelo con formato parquet
+    generado con Apache Spark
+
+    ![](raw_master.png)
 
 ## Ejemplo de uso
 
