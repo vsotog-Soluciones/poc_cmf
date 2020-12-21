@@ -1,4 +1,4 @@
-## Conversión xlsx a csv en Pyhton 
+## Conversión xlsx a csv en Python 
 ## Resumen
 
 _Estas instrucciones permitirán convertir los archivos de la carpeta data de xlsx a csv mediante instrucciones escritas en Python 2.7._
