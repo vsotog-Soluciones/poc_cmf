@@ -1,5 +1,5 @@
-# BigDataGovernance TemplateBase version 2.6 
-Proyecto base para ser utilizado en cualquier proyecto BigData
+#POC GDD DATOS CMF
+
 
 ## Instrucciones
 * Abrir el archivo pom.xml y cambiar los siguientes elementos:
